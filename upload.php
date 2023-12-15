@@ -13,10 +13,7 @@
             $formats = array('jpg','png','jpeg','gif');
             if (in_array($fileType,$formats)) {
                 if (move_uploaded_file($_FILES['file']['tmp_name'],$filePath)) {
-                    $sql = "INSERT INTO images (file_name) VALUES (?)";
-                    $stmt = $sql->prepare();
-                    $stmt = $sql->bind_params('s',$filename);
-                    
+                    $sql = "INSERT INTO images (file_name) VALUES ('$filename')";
                     if ($result = mysqli_query($conn,$sql)) {
                         $rep = urlencode('File was uploaded succesfully');
                         header("Location: index.php?succes=".$rep."");
